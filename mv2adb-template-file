@@ -1,0 +1,59 @@
+#------------------------------------------#
+# DB Parameters                            #
+#------------------------------------------#
+DB_CONSTRING=                              # Source DB connect string
+SYSTEM_DB_PASSWORD=                        # Source Database 'system' password (with Advisor command option is the 'sys' password), must be encrypted by 'mv2adb encpass'
+SCHEMAS=                                   # Comma separated schemas to export/import
+FULL=                                      # FULL=Y for full expdp
+EXCLUDE=                                   # Comma separated schemas to be excluded
+REMAP=                                     # comma separated remap SOURCE_TBS:TARGET_TBS
+DUMP_NAME=                                 # ExpDP dump file name
+DUMP_PATH=                                 # ExpDP dump file path, on RAC environment the dump path must be a shared filesystem
+DUMP_FILES=                                # Comma separated dump files
+OHOME=                                     # RDBMS Oracle Home
+ICHOME=                                    # Instant Client Oracle Home mandatory with auto/impdp
+#------------------------------------------#
+# Expdp/Impdp Parameters                   #
+#------------------------------------------#
+COMPRESSION=                               # Expdp compression type {ALL | DATA_ONLY | METADATA_ONLY | NONE}
+EXTRA_EXPDP=                               # Extra expdp parameters
+EXTRA_IMPDP=                               # Extra expdp parameters
+JOB_NAME=                                  # Expdp/Impdp job name
+ENC_PASSWORD=                              # Expdp/Impdp encryption password, must be encrypted by 'mv2adb encpass'
+ENC_TYPE=                                  # Expdp/Impdp encryption type { AES128 | AES192 | AES256 }
+#------------------------------------------#
+# ADB Parameters                           #
+#------------------------------------------#
+ADB_NAME=                                  # Database name
+ADB_PASSWORD=                              # ADB Database 'admin' password
+ADB_CORES=                                 # Optional (skip auto check)
+ADB_TARGET=                                # Optional in use with 'advisor' command {ADW|ATP|ATPD}
+ADB_CFILE=                                 # Credential zip file
+#------------------------------------------#
+SQL_PROXY_HOST=                            # Optional to connect ADB (SQL*Net) by proxy
+SQL_PROXY_PORT=                            # Optional to connect ADB (SQL*Net) by proxy
+#------------------------------------------#
+# Object Store Properties                  #
+#------------------------------------------#
+OCI_REGION=                                # mandatory if OCIC=false or not defined
+OCI_NAMESPACE=                             # mandatory if OCIC=false or not defined
+OCI_BUCKET=                                # mandatory
+#------------------------------------------#
+OCI_ID=                                    # Oracle Database Backup Cloud Service account
+OCI_PASSWORD=                              # Auth Tokens password for the OCI account, must be encrypted by 'mv2adb encpass'
+#------------------------------------------#
+PROXY_HOST=                                # Optional
+PROXY_PORT=                                # Optional
+PROXY_ID=                                  # Optional
+PROXY_PASSWORD=                            # Optional, must be encrypted by 'mv2adb encpass'
+#------------------------------------------#
+# OCI-Client Properties                    #
+#------------------------------------------#
+OCIC=                                      # Optional, if true oci-client will be used
+OCIC_SIZE=                                 # Split file size Mb (Default: 128)
+OCIC_PARALLEL=                             # Parallel upload count (Default: 3)
+OCIC_COMPART_ID=                           # Oracle Object Store Compartment (required with list/create bucket using oci-cli)
+#------------------------------------------#
+# End Of File                              #
+#------------------------------------------#
+
