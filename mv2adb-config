@@ -1,8 +1,45 @@
+#### encrypt db  atp oci passwords
+#### Disclaimer to any user or possible wanna be hacker on github
+#### before to report any false report about been able to read hidden passwords in any of the files that you will find here
+#### be sure to understand that there is no artifact in Oracle OCi infrastructure with the below passwords, users, connection string, IP
+#### any possible or derived configuration, any guesses on OCI tenancy declarations any links to Oracle deployements
+#### these scripts are given only for educational purposes , and they should not be used in production environments
+#### there is no support on the possilbe issues, no warranties that the configuration will work on any other environments
+####
+#### Eugene Simos
+#####
+#####
+export YOUR_SOURCE_DB_PASSWORD="whatever"
+export YOUR_ATP_TARGE_PASSWORD="whatever"
+export YOUR_OCI_TOKEN="whatever"
+cd
+echo $YOUR_SOURCE_DB_PASSWORD >>  oracle_passwd
+cat oracle_passwd | mv2adb.bin  encpass 2>/dev/null 1>res.txt 
+tail -1  res.txt >enc_oracle_passwd
+cat enc_oracle_passwd
+
+echo $YOUR_ATP_TARGE_PASSWORD >   atp_passwd
+echo $YOUR_ATP_TARGE_PASSWORD >>  atp_passwd
+cat atp_passwd | mv2adb.bin  encpass 2>/dev/null 1>res.txt 
+tail -1  res.txt >enc_atp_passwd
+cat enc_atp_passwd
+
+echo $YOUR_OCI_TOKEN>   oci_passwd
+echo $YOUR_OCI_TOKEN>>   oci_passwd
+cat oci_passwd | mv2adb.bin  encpass 2>/dev/null 1>res.txt 
+tail -1  res.txt >enc_oci_passwd
+cat enc_oci_passwd
+
+export SOURCE_DB="whatever"
+export YOUR_OCI_ID="whatever"
+export YOUR_ORACLE_OCI_TENANCY="whatever"
+
+
 cat << EOF > atp_mv2adb.config
 #---------------------------------------------------#
 # DB Parameters #
 #---------------------------------------------------#
-DB_CONSTRING=//database19c-mutlitenat.publicdbcs.dbcs.oraclevcn.com:1523/pdb1
+DB_CONSTRING=//$SOURCE_DB
 SYSTEM_DB_PASSWORD=$enc_oracle_passwd
 SCHEMAS=OE
 REMAP=USERS:DATA
@@ -32,7 +69,7 @@ ADB_CORES=1
 OCI_REGION=eu-frankfurt-1
 OCI_NAMESPACE=oraseemeatechse
 OCI_BUCKET=mv2adb 
-OCI_ID=oracleidentitycloudservice/eugene.simos@oracle.com
+OCI_ID=$OCI_ID
 OCI_PASSWORD=$enc_oci_passwd
 #
 #PROXY_HOST=
@@ -45,7 +82,7 @@ OCI_PASSWORD=$enc_oci_passwd
 OCIC=true
 OCIC_SIZE=10
 OCIC_PARALLEL=10
-OCIC_COMPART_ID=ocid1.compartment.oc1..aaaaaaaa375sfgxnc24b3rmxjju6ttxv264t6ukiyv42txxfxs3zj2difroa
+OCIC_COMPART_ID=$YOUR_ORACLE_OCI_TENANCY
 #---------------------------------------------------#
 # End Of File #
 #---------------------------------------------------#
